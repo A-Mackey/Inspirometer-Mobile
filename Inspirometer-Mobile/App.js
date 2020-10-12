@@ -39,9 +39,9 @@ export default class App extends React.Component {
     let AppComponent = null;
 
     if (this.state.index == 0) {
-        AppComponent = Chart
-    } else if (this.state.index == 1) {
         AppComponent = NewReading
+    } else if (this.state.index == 1) {
+        AppComponent = Chart
     } else if (this.state.index == 2) {
       AppComponent = Settings
     } else if (this.state.index == 3) {
