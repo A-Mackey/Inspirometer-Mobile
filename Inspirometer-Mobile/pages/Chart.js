@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Dimensions } from 'react-native';
-import { Container, Header, Content, Button, Text, View, Card, CardItem } from 'native-base';
+import { Container, Header, Content, Button, Text, View, Card, CardItem, Body, Left, Right } from 'native-base';
 import { LineChart, BarChart, PieChart, ProgressChart, ContributionGraph, StackedBarChart } from "react-native-chart-kit";
 
 
@@ -15,7 +15,7 @@ export default class ButtonExample extends Component {
         <Content>
             <View>
                 <Card transparent>
-                    <CardItem>
+                    <Body>
                         <LineChart
                             data={{
                             labels: ["Monday", "Tuesday", "Wednesday", "Thursday"],
@@ -30,7 +30,7 @@ export default class ButtonExample extends Component {
                                 }
                             ]
                             }}
-                            width={380} // from react-native
+                            width={windowWidth * .94} // from react-native
                             height={500}
                             yAxisLabel="$"
                             yAxisSuffix="k"
@@ -57,7 +57,7 @@ export default class ButtonExample extends Component {
                                 borderRadius: 16
                             }}
                         />
-                    </CardItem>
+                    </Body>
                 </Card>
             </View>
         </Content>
