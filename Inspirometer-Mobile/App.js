@@ -60,16 +60,16 @@ export default class App extends React.Component {
 
     const styles = StyleSheet.create({
       header: {
-        backgroundColor: '#1D3461',
-        textShadowColor: 'white',
+        backgroundColor: '#FFFF',
+        textShadowColor: 'black',
       },
 
       headerText: {
-        color: '#FFF',
+        color: '#000',
       },
 
       headerIcons: {
-        color: '#FFF',
+        color: '#000',
       },  
 
       body: {
@@ -77,7 +77,7 @@ export default class App extends React.Component {
       },
 
       footer: {
-        backgroundColor: '#1D3461',
+        backgroundColor: '#FFF',
       },
 
       footerIconActive: {
@@ -85,7 +85,7 @@ export default class App extends React.Component {
       },
 
       footerIconDeactive: {
-        color: '#FFF',
+        color: '#adc5ff',
       }
     });
 
