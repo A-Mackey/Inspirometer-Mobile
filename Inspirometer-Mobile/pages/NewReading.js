@@ -31,7 +31,6 @@ export default class ButtonExample extends Component {
     }
 
     return (
-      <Container>
         <Content>
 
           {/* Start new test button */}
@@ -71,7 +70,6 @@ export default class ButtonExample extends Component {
           </Body>
           
         </Content>
-      </Container>
     );
   }
 }
