@@ -48,6 +48,8 @@ export default class App extends React.Component {
       AppComponent = User
     }
 
+    //VARIABLES
+
     const iconFooterSize = 28;
 
     //FUNCTIONS
@@ -60,16 +62,16 @@ export default class App extends React.Component {
 
     const styles = StyleSheet.create({
       header: {
-        backgroundColor: '#1D3461',
-        textShadowColor: 'white',
+        backgroundColor: '#FFF',
       },
 
       headerText: {
-        color: '#FFF',
+        color: '#ADC5FF',
+        fontSize: 20,
       },
 
       headerIcons: {
-        color: '#FFF',
+        color: '#ADC5FF',
       },  
 
       body: {
@@ -77,15 +79,15 @@ export default class App extends React.Component {
       },
 
       footer: {
-        backgroundColor: '#1D3461',
+        backgroundColor: '#FFF',
       },
 
       footerIconActive: {
-        color: '#000',
+        color: 'black',
       },
 
       footerIconDeactive: {
-        color: '#FFF',
+        color: '#ADC5FF',
       }
     });
 
@@ -94,19 +96,9 @@ export default class App extends React.Component {
     return (
       <Container>
         <Header style={styles.header}>
-          <Left>
-
-          </Left>
-
           <Body>
               <Title style={styles.headerText}>Inspirometer</Title>
           </Body>
-
-          <Right>
-            <Button transparent onPress={testFunction}>
-              <Icon name='refresh' style={styles.headerIcons}></Icon>
-            </Button>
-          </Right>
         </Header>
 
 
