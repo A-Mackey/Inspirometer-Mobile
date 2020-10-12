@@ -5,6 +5,17 @@ import { LineChart, BarChart, PieChart, ProgressChart, ContributionGraph, Stacke
 
 
 export default class ButtonExample extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+          date: 0,
+        };
+      }
+
+      switchDate(index) {
+        this.setState({date: index})
+     }
+
   render() {
 
     const windowWidth = Dimensions.get('window').width;
@@ -21,18 +32,16 @@ export default class ButtonExample extends Component {
                         datasets: [
                             {
                             data: [
-                                Math.random() * 100,
-                                Math.random() * 100,
-                                Math.random() * 100,
-                                Math.random() * 100,
+                                Math.random() * 50 + 50,
+                                Math.random() * 50 + 50,
+                                Math.random() * 50 + 50,
+                                Math.random() * 50 + 50,
                             ]
                             }
                         ],
                         }}
                         width={windowWidth * .92} // from react-native
                         height={450}
-                        yAxisLabel="$"
-                        yAxisSuffix="k"
                         yAxisInterval={1} // optional, defaults to 1
                         chartConfig={{
                         backgroundColor: "#adc5ff",
@@ -52,13 +61,32 @@ export default class ButtonExample extends Component {
                         }}
                         bezier
                         style={{
-                            marginVertical: 8,
+                            marginTop: 8,
                             borderRadius: 16
                         }}
                     />
                 </Body>
             </Card>
         </View>
+        <Body>
+            <View style={{flexDirection: "row"}}>
+                <Button active={this.state.date === 0} onPress={() => this.switchDate(0)} style={{backgroundColor: "white", marginHorizontal: 6}}>
+                    <Text style={{color: "#adc5ff"}}>3d</Text>
+                </Button>
+                <Button active={this.state.date === 1} onPress={() => this.switchDate(1)} style={{backgroundColor: "white", marginHorizontal: 6}}>
+                    <Text style={{color: "#adc5ff"}}>1w</Text>
+                </Button>
+                <Button active={this.state.date === 2} onPress={() => this.switchDate(2)} style={{backgroundColor: "white", marginHorizontal: 6}}>
+                    <Text style={{color: "#adc5ff"}}>2w</Text>
+                </Button>
+                <Button active={this.state.date === 3} onPress={() => this.switchDate(3)} style={{backgroundColor: "white", marginHorizontal: 6}}>
+                    <Text style={{color: "#adc5ff"}}>1m</Text>
+                </Button>
+                <Button active={this.state.date === 4} onPress={() => this.switchDate(4)} style={{backgroundColor: "white", marginHorizontal: 6}}>
+                    <Text style={{color: "#adc5ff"}}>3m</Text>
+                </Button>
+            </View>
+        </Body>
     </Content>
     );
   }
