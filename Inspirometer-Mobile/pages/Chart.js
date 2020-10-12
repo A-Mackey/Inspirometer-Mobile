@@ -4,7 +4,7 @@ import { Container, Header, Content, Button, Text, View, Card, CardItem, Body, L
 import { LineChart, BarChart, PieChart, ProgressChart, ContributionGraph, StackedBarChart } from "react-native-chart-kit";
 
 
-export default class ButtonExample extends Component {
+export default class Chart extends Component {
     constructor(props) {
         super(props);
         this.state = {

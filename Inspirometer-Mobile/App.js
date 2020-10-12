@@ -4,6 +4,8 @@ import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
 import { Ionicons, AntDesign, FontAwesome } from '@expo/vector-icons';
 import { Container, Header, View, Fab, Button, Icon, Body, Title, Tabs, Tab, ScrollableTab, Footer, Content, FooterTab, Left, Right } from 'native-base';
+
+//Pages
 import Chart from './pages/Chart'
 import NewReading from './pages/NewReading'
 import Settings from './pages/Settings'
@@ -20,7 +22,7 @@ export default class App extends React.Component {
 
   switchScreen(index) {
     this.setState({index: index})
- }
+  }
 
   async componentDidMount() {
     await Font.loadAsync({

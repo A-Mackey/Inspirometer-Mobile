@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Dimensions, ColorPropType } from 'react-native';
 import { Container, Header, Content, Form, Item, Input, Label, Text, Button, Body } from 'native-base';
-export default class FloatingLabelExample extends Component {
+
+
+export default class User extends Component {
   render() {
     
     const windowWidth = Dimensions.get('window').width;

@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import {StyleSheet, Dimensions} from 'react-native';
 import { Container, Content, Button, Text, Body, Card, CardItem} from 'native-base';
-export default class ButtonExample extends Component {
 
-  
 
+export default class NewReading extends Component {
   render() {
     const windowWidth = Dimensions.get('window').width;
     const windowHeight = Dimensions.get('window').height;
+
+    var testValue = 10;
 
     const styles = StyleSheet.create({
       contentButton: {
@@ -24,6 +25,27 @@ export default class ButtonExample extends Component {
       bodyCard: {
         width: windowWidth * 0.8,
       },
+
+      testResultContainer: {
+        marginTop: 15,
+        backgroundColor: '#ADC5FF',
+
+        width: windowWidth * 0.8,
+        height: 200,
+
+        borderWidth: 2,
+        borderColor: '#8294bf',
+
+        borderRadius: 20,
+      },
+
+      testResultText: {
+        color: 'white',
+        fontSize: 150,
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+      }
     });
 
     function testFunction() {
@@ -67,6 +89,10 @@ export default class ButtonExample extends Component {
                 </CardItem>
             </Card>
 
+          </Body>
+
+          <Body style={styles.testResultContainer}>
+            <Text style={styles.testResultText}>{testValue}</Text>
           </Body>
           
         </Content>
