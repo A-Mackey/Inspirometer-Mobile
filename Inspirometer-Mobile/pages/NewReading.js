@@ -4,7 +4,6 @@ export default class ButtonExample extends Component {
   render() {
     return (
       <Container>
-        <Header />
         <Content>
             <Text>New Reading</Text>
         </Content>
