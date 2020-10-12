@@ -39,12 +39,23 @@ export default class NewReading extends Component {
         borderRadius: 20,
       },
 
+      testRestultLabel: {
+        marginTop: 15,
+        fontWeight: 'bold',
+        fontSize: 15,
+      },
+
       testResultText: {
         color: 'white',
         fontSize: 150,
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
+      },
+
+      testResultTextAfter: {
+        color: 'white',
+        fontSize: 25,
       }
     });
 
@@ -72,7 +83,7 @@ export default class NewReading extends Component {
 
           <Card style={styles.bodyCard}>
               <Body>
-                <CardItem>
+                <CardItem header>
                   <Text>Instructions</Text>
                 </CardItem>
               </Body>
@@ -91,8 +102,13 @@ export default class NewReading extends Component {
 
           </Body>
 
+          <Body>
+            <Text style={styles.testRestultLabel}>Lung Capacity</Text>
+          </Body>
+
           <Body style={styles.testResultContainer}>
             <Text style={styles.testResultText}>{testValue}</Text>
+            <Text style={styles.testResultTextAfter}>units</Text>
           </Body>
           
         </Content>
