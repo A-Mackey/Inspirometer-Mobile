@@ -1,7 +1,26 @@
 import React, { Component } from 'react';
-import {StyleSheet, Dimensions} from 'react-native';
+import {StyleSheet, Dimensions, AsyncStorage} from 'react-native';
 import { Container, Content, Button, Text, Body, Card, CardItem} from 'native-base';
 
+async function storeData(str) {
+  try {
+      await AsyncStorage.setItem('name', str);
+  } catch (error) {
+      // Error saving data
+  }
+}
+
+async function retrieveData() {
+  try {
+      const value = await AsyncStorage.getItem('name');
+      if (value !== null) {
+          // Our data is fetched successfully
+          console.log(value);
+      }
+  } catch (error) {
+      // Error retrieving data
+  }
+}
 
 export default class NewReading extends Component {
   render() {
@@ -59,8 +78,9 @@ export default class NewReading extends Component {
       }
     });
 
-    function testFunction() {
+    function testFunction(str) {
       console.log(windowWidth + "x" + windowHeight);
+      storeData(str);
     }
 
     return (
@@ -70,9 +90,15 @@ export default class NewReading extends Component {
 
           <Body>
 
-            <Button style={styles.contentButton} onPress={testFunction}>
+            <Button style={styles.contentButton} onPress={() => testFunction("TESTTTTTTTTTTTTTT")}>
               <Body>
                 <Text style={styles.text}>Start new test</Text>
+              </Body>
+            </Button>
+
+            <Button style={styles.contentButton} onPress={retrieveData}>
+              <Body>
+                <Text style={styles.text}>retrieve data</Text>
               </Body>
             </Button>
 
