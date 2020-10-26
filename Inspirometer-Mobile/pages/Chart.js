@@ -3,12 +3,24 @@ import { Dimensions } from 'react-native';
 import { Container, Header, Content, Button, Text, View, Card, CardItem, Body, Left, Right } from 'native-base';
 import { LineChart, BarChart, PieChart, ProgressChart, ContributionGraph, StackedBarChart } from "react-native-chart-kit";
 
+async function retrieveData(key) {
+    try {
+        const value = await AsyncStorage.getItem(key);
+        if (value !== null) {
+            // Our data is fetched successfully
+            console.log(value);
+        }
+    } catch (error) {
+        // Error retrieving data
+    }
+  }
 
 export default class Chart extends Component {
     constructor(props) {
         super(props);
         this.state = {
           date: 0,
+          data: [],
         };
       }
 
@@ -17,6 +29,14 @@ export default class Chart extends Component {
      }
 
   render() {
+
+    this.state.data[this.state.data.length] = 1;
+    this.state.data[this.state.data.length] = 2;
+    this.state.data[this.state.data.length] = 4;
+    this.state.data[this.state.data.length] = 8;
+    this.state.data[this.state.data.length] = 16;
+    this.state.data[this.state.data.length] = 32;
+    this.state.data[this.state.data.length] = 64;
 
     const windowWidth = Dimensions.get('window').width;
     const windowHeight = Dimensions.get('window').height;
@@ -31,12 +51,7 @@ export default class Chart extends Component {
                         labels: ["Monday", "Tuesday", "Wednesday", "Thursday"],
                         datasets: [
                             {
-                            data: [
-                                Math.random() * 50 + 50,
-                                Math.random() * 50 + 50,
-                                Math.random() * 50 + 50,
-                                Math.random() * 50 + 50,
-                            ]
+                            data: this.state.data
                             }
                         ],
                         }}

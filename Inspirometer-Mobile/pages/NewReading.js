@@ -2,17 +2,28 @@ import React, { Component } from 'react';
 import {StyleSheet, Dimensions, AsyncStorage} from 'react-native';
 import { Container, Content, Button, Text, Body, Card, CardItem} from 'native-base';
 
-async function storeData(str) {
+function getCurrentKey() {
+  var day = new Date().getDate(); //To get the Current Date
+  var month = new Date().getMonth() + 1; //To get the Current Month
+  var year = new Date().getFullYear(); //To get the Current Year
+  var hours = new Date().getHours(); //To get the Current Hours
+  var min = new Date().getMinutes(); //To get the Current Minutes
+  var sec = new Date().getSeconds(); //To get the Current Seconds
+
+  return month + "." + day + "." + year + ":" + hours + "." + min + "." + sec;
+}
+
+async function storeData(key, value) {
   try {
-      await AsyncStorage.setItem('name', str);
+      await AsyncStorage.setItem(key, value);
   } catch (error) {
       // Error saving data
   }
 }
 
-async function retrieveData() {
+async function retrieveData(key) {
   try {
-      const value = await AsyncStorage.getItem('name');
+      const value = await AsyncStorage.getItem(key);
       if (value !== null) {
           // Our data is fetched successfully
           console.log(value);
@@ -20,6 +31,17 @@ async function retrieveData() {
   } catch (error) {
       // Error retrieving data
   }
+}
+
+async function allData() {
+  try {
+    const keys = await AsyncStorage.getAllKeys()
+    const items = await AsyncStorage.multiGet(keys)
+
+    return items
+} catch (error) {
+    console.log(error, "Problem")
+}
 }
 
 export default class NewReading extends Component {
@@ -78,9 +100,28 @@ export default class NewReading extends Component {
       }
     });
 
-    function testFunction(str) {
-      console.log(windowWidth + "x" + windowHeight);
-      storeData(str);
+    function recordTest() {
+      var key = getCurrentKey();
+      console.log(key);
+      var value = (Math.random() * 10) + "";
+
+      //do stuff with device to do the test
+
+      storeData(key, value);
+    }
+
+    async function getAllData() {
+      var data = await allData();
+      console.log(data);
+    }
+
+    async function clearData() {
+      try {
+        AsyncStorage.clear();
+      } catch (err)
+      {
+        console.log("Error: " + err);
+      }
     }
 
     return (
@@ -90,15 +131,27 @@ export default class NewReading extends Component {
 
           <Body>
 
-            <Button style={styles.contentButton} onPress={() => testFunction("TESTTTTTTTTTTTTTT")}>
+            <Button style={styles.contentButton} onPress={() => recordTest()}>
               <Body>
                 <Text style={styles.text}>Start new test</Text>
               </Body>
             </Button>
 
-            <Button style={styles.contentButton} onPress={retrieveData}>
+            <Button style={styles.contentButton} onPress={() => retrieveData(getCurrentKey())}>
               <Body>
                 <Text style={styles.text}>retrieve data</Text>
+              </Body>
+            </Button>
+
+            <Button style={styles.contentButton} onPress={() => getAllData()}>
+              <Body>
+                <Text style={styles.text}>Get all data</Text>
+              </Body>
+            </Button>
+
+            <Button style={styles.contentButton} onPress={() => clearData()}>
+              <Body>
+                <Text style={styles.text}>DELETE EVERYTHING</Text>
               </Body>
             </Button>
 
