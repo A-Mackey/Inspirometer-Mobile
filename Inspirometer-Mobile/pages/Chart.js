@@ -3,12 +3,42 @@ import { Dimensions } from 'react-native';
 import { Container, Header, Content, Button, Text, View, Card, CardItem, Body, Left, Right } from 'native-base';
 import { LineChart, BarChart, PieChart, ProgressChart, ContributionGraph, StackedBarChart } from "react-native-chart-kit";
 
+async function storeData(val) {
+    try {
+        await AsyncStorage.setItem('scores', val);
+    } catch (error) {
+        // Error saving data
+    }
+  }
+
+async function retrieveData() {
+    try {
+        const value = await AsyncStorage.getItem('scores');
+        if (value !== null) {
+            // Our data is fetched successfully
+            console.log(value);
+            return value;
+        }
+    } 
+    catch (error) {
+        // Error retrieving data
+    }
+}
+
+async function setData() {
+    let scores = [ 10, 15, 20, 25, 30, 35, 40, 45 ];
+
+    await storeData(scores);
+    this.state.scores = await retrieveData();
+    console.log(this.state.scores);
+}
 
 export default class Chart extends Component {
     constructor(props) {
         super(props);
         this.state = {
           date: 0,
+          scores: [],
         };
       }
 
@@ -17,6 +47,8 @@ export default class Chart extends Component {
      }
 
   render() {
+
+    setData();
 
     const windowWidth = Dimensions.get('window').width;
     const windowHeight = Dimensions.get('window').height;
@@ -28,15 +60,21 @@ export default class Chart extends Component {
                 <Body>
                     <LineChart
                         data={{
-                        labels: ["Monday", "Tuesday", "Wednesday", "Thursday"],
+                        labels: [
+                            "Monday", 
+                            "Tuesday", 
+                            "Wednesday", 
+                            "Thursday"
+                        ],
                         datasets: [
                             {
-                            data: [
-                                Math.random() * 50 + 50,
-                                Math.random() * 50 + 50,
-                                Math.random() * 50 + 50,
-                                Math.random() * 50 + 50,
-                            ]
+                            data: this.state.scores,
+                            // data: [
+                            //     Math.random() * 50 + 50,
+                            //     Math.random() * 50 + 50,
+                            //     Math.random() * 50 + 50,
+                            //     Math.random() * 50 + 50,
+                            // ]
                             }
                         ],
                         }}
