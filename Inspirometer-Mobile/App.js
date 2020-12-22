@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet} from 'react-native'
+import { StyleSheet, NativeAppEventEmitter } from 'react-native'
 import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
 import { Ionicons, AntDesign, FontAwesome } from '@expo/vector-icons';
@@ -10,6 +10,8 @@ import Chart from './pages/Chart'
 import NewReading from './pages/NewReading'
 import Settings from './pages/Settings'
 import User from './pages/User'
+import Devices from './pages/Devices'
+
 
 export default class App extends React.Component {
   constructor(props) {
@@ -48,6 +50,8 @@ export default class App extends React.Component {
       AppComponent = Settings
     } else if (this.state.index == 3) {
       AppComponent = User
+    } else if (this.state.index == 4) {
+      AppComponent = Devices
     }
 
     //VARIABLES
@@ -131,6 +135,12 @@ export default class App extends React.Component {
             <FooterTab>
             <Button active={this.state.index === 3} onPress={() => this.switchScreen(3)}>
               <FontAwesome style={this.state.index == 3 ? styles.footerIconActive : styles.footerIconDeactive} name="user" size={iconFooterSize} />
+            </Button>
+          </FooterTab>
+
+          <FooterTab>
+            <Button active={this.state.index === 4} onPress={() => this.switchScreen(4)}>
+              <FontAwesome style={this.state.index == 4 ? styles.footerIconActive : styles.footerIconDeactive} name="user" size={iconFooterSize} />
             </Button>
           </FooterTab>
 
