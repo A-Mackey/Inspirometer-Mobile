@@ -19,24 +19,35 @@ export default class Chart extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          date: 0,
+          startDate: 0,
+          endDate: 0,
           data: [],
         };
       }
 
-      switchDate(index) {
-        this.setState({date: index})
-     }
+    switchDate(index) {
+        let date = new Date();
+
+        if (index == 0) {
+            date = moment(date).subtract(3, 'day')
+        }
+    }
 
   render() {
 
-    this.state.data[this.state.data.length] = 1;
-    this.state.data[this.state.data.length] = 2;
-    this.state.data[this.state.data.length] = 4;
-    this.state.data[this.state.data.length] = 8;
-    this.state.data[this.state.data.length] = 16;
-    this.state.data[this.state.data.length] = 32;
-    this.state.data[this.state.data.length] = 64;
+    async function getDataInTime(startDate, endDate) {
+        console.log("from " + startDate + " to " + endDate);
+    }
+
+    
+    getDataInTime(this.state.startDate, new Date());
+
+    this.state.data.push(1);
+    this.state.data.push(1);
+    this.state.data.push(1);
+    this.state.data.push(1);
+    this.state.data.push(1);
+
 
     const windowWidth = Dimensions.get('window').width;
     const windowHeight = Dimensions.get('window').height;

@@ -3,14 +3,7 @@ import {StyleSheet, Dimensions, AsyncStorage} from 'react-native';
 import { Container, Content, Button, Text, Body, Card, CardItem} from 'native-base';
 
 function getCurrentKey() {
-  var day = new Date().getDate(); //To get the Current Date
-  var month = new Date().getMonth() + 1; //To get the Current Month
-  var year = new Date().getFullYear(); //To get the Current Year
-  var hours = new Date().getHours(); //To get the Current Hours
-  var min = new Date().getMinutes(); //To get the Current Minutes
-  var sec = new Date().getSeconds(); //To get the Current Seconds
-
-  return month + "." + day + "." + year + ":" + hours + "." + min + "." + sec;
+  return new Date() + "";
 }
 
 async function storeData(key, value) {
@@ -35,7 +28,7 @@ async function retrieveData(key) {
 
 async function allData() {
   try {
-    const keys = await AsyncStorage.getAllKeys()
+    const keys = await AsyncStorage.getAllKeys();
     const items = await AsyncStorage.multiGet(keys)
 
     return items

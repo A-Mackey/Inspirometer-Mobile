@@ -1,17 +1,16 @@
 import React from 'react';
-import { StyleSheet, NativeAppEventEmitter } from 'react-native'
+import {StyleSheet, Dimensions, Text} from 'react-native'
 import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
 import { Ionicons, AntDesign, FontAwesome } from '@expo/vector-icons';
-import { Container, Header, View, Fab, Button, Icon, Body, Title, Tabs, Tab, ScrollableTab, Footer, Content, FooterTab, Left, Right } from 'native-base';
+import { Container, Header, View, Fab, Button, Footer, Content, FooterTab, Left, Right } from 'native-base';
 
 //Pages
-import Chart from './pages/Chart'
-import NewReading from './pages/NewReading'
-import Settings from './pages/Settings'
-import User from './pages/User'
-import Devices from './pages/Devices'
+import MainScreen from './Screens/MainScreen'
+import IntroScreen from './Screens/IntroScreen';
 
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 export default class App extends React.Component {
   constructor(props) {
@@ -23,6 +22,7 @@ export default class App extends React.Component {
   }
 
   switchScreen(index) {
+    console.log("Switching from: " + this.state.index + " to " + index);
     this.setState({index: index})
   }
 
@@ -41,27 +41,23 @@ export default class App extends React.Component {
     }
 
     let AppComponent = null;
+    let IntroChanger = null;
 
     if (this.state.index == 0) {
-        AppComponent = NewReading
+        AppComponent = IntroScreen
     } else if (this.state.index == 1) {
-        AppComponent = Chart
-    } else if (this.state.index == 2) {
-      AppComponent = Settings
-    } else if (this.state.index == 3) {
-      AppComponent = User
-    } else if (this.state.index == 4) {
-      AppComponent = Devices
+        AppComponent = MainScreen
     }
 
     //VARIABLES
 
-    const iconFooterSize = 28;
+    const iconFooterSize = 26;
 
     //FUNCTIONS
   
     function testFunction(test) {
       console.log("Redoing Test...");
+      this.setState({ index: 1 });
     }
 
     //STYLESHEET
@@ -85,14 +81,22 @@ export default class App extends React.Component {
       },
 
       footer: {
+        //height: windowHeight * 0.05,
         backgroundColor: '#FFF',
       },
 
+      footerTab: {
+      },
+
       footerIconActive: {
+        //paddingTop: windowHeight * 0.0125,
+        //height: windowHeight * 0.05,
         color: 'black',
       },
 
       footerIconDeactive: {
+        //paddingTop: windowHeight * 0.0125,
+        //height: windowHeight * 0.05,
         color: '#ADC5FF',
       }
     });
@@ -101,51 +105,28 @@ export default class App extends React.Component {
 
     return (
       <Container>
-        <Header style={styles.header}>
-          <Body>
-              <Title style={styles.headerText}>Inspirometer</Title>
-          </Body>
-        </Header>
 
 
-        <Content>
-          <AppComponent/>
-        </Content>
+        <AppComponent/>
 
-
-        <Footer style={styles.footer}>
-          <FooterTab>
-            <Button active={this.state.index === 0} onPress={() => this.switchScreen(0)}>
-              <AntDesign style={this.state.index == 0 ? styles.footerIconActive : styles.footerIconDeactive} name="edit" size={iconFooterSize} />
-            </Button>
-            </FooterTab>
-
-            <FooterTab>
-            <Button active={this.state.index === 1} onPress={() => this.switchScreen(1)}>
-              <AntDesign style={this.state.index == 1 ? styles.footerIconActive : styles.footerIconDeactive} name="linechart" size={iconFooterSize} />
-            </Button>
-            </FooterTab>
-
-            <FooterTab>
-            <Button active={this.state.index === 2} onPress={() => this.switchScreen(2)}>
-              <FontAwesome style={this.state.index == 2 ? styles.footerIconActive : styles.footerIconDeactive} name="gear" size={iconFooterSize} />
-            </Button>
-            </FooterTab>
-
-            <FooterTab>
-            <Button active={this.state.index === 3} onPress={() => this.switchScreen(3)}>
-              <FontAwesome style={this.state.index == 3 ? styles.footerIconActive : styles.footerIconDeactive} name="user" size={iconFooterSize} />
-            </Button>
-          </FooterTab>
-
-          <FooterTab>
-            <Button active={this.state.index === 4} onPress={() => this.switchScreen(4)}>
-              <FontAwesome style={this.state.index == 4 ? styles.footerIconActive : styles.footerIconDeactive} name="user" size={iconFooterSize} />
-            </Button>
-          </FooterTab>
-
-        </Footer>
-
+          {
+          
+          this.state.index == 0 
+          
+          ? 
+          
+          <Footer active={this.state.index === 0}>
+          <Button onPress={() => this.switchScreen(1)}>
+            <Text>
+              Go to main screen
+            </Text>
+          </Button>
+        </Footer> 
+        
+        : 
+        
+        null
+        }
         
       </Container>
     );
