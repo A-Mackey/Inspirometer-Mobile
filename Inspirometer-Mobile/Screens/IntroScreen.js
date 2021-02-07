@@ -41,28 +41,6 @@ export default class IntroScreen extends React.Component {
       return <AppLoading />;
     }
 
-    let AppComponent = null;
-
-    if (this.state.index == 0) {
-        AppComponent = NewReading
-    } else if (this.state.index == 1) {
-        AppComponent = Chart
-    } else if (this.state.index == 2) {
-      AppComponent = Settings
-    } else if (this.state.index == 3) {
-      AppComponent = User
-    }
-
-    //VARIABLES
-
-    const iconFooterSize = 26;
-
-    //FUNCTIONS
-  
-    function testFunction(test) {
-      console.log("Redoing Test...");
-    }
-
     //STYLESHEET
 
     const styles = StyleSheet.create({

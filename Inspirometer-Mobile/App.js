@@ -4,6 +4,7 @@ import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
 import { Ionicons, AntDesign, FontAwesome } from '@expo/vector-icons';
 import { Container, Header, View, Fab, Button, Footer, Content, FooterTab, Left, Right } from 'native-base';
+import BleManager from 'react-native-ble-manager';
 
 //Pages
 import MainScreen from './Screens/MainScreen'
@@ -33,6 +34,14 @@ export default class App extends React.Component {
       ...Ionicons.font,
     });
     this.setState({ isReady: true });
+
+    console.log("Mounted");
+
+    BleManager.start({ showAlert: false }).then(() => {
+        // Success code
+        console.log("Module initialized");
+    })
+    .catch(err => console.log("Ble Manager starting error: " + err));
   };
 
   render() {
@@ -41,26 +50,12 @@ export default class App extends React.Component {
     }
 
     let AppComponent = null;
-    let IntroChanger = null;
 
     if (this.state.index == 0) {
         AppComponent = IntroScreen
     } else if (this.state.index == 1) {
         AppComponent = MainScreen
     }
-
-    //VARIABLES
-
-    const iconFooterSize = 26;
-
-    //FUNCTIONS
-  
-    function testFunction(test) {
-      console.log("Redoing Test...");
-      this.setState({ index: 1 });
-    }
-
-    //STYLESHEET
 
     const styles = StyleSheet.create({
       header: {

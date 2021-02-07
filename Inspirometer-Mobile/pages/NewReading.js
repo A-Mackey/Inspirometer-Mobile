@@ -73,7 +73,7 @@ export default class NewReading extends Component {
               </Body>
             </Button>
 
-            <Button style={styles.contentButton} onPress={() => backendDatabaseFunctions.retrieveData(getCurrentKey())}>
+            <Button style={styles.contentButton} onPress={() => backendDatabaseFunctions.retrieveData(backendDatabaseFunctions.getCurrentKey())}>
               <Body>
                 <Text style={styles.text}>retrieve data</Text>
               </Body>
@@ -88,6 +88,12 @@ export default class NewReading extends Component {
             <Button style={styles.contentButton} onPress={() => backendDatabaseFunctions.clearData()}>
               <Body>
                 <Text style={styles.text}>DELETE EVERYTHING</Text>
+              </Body>
+            </Button>
+
+            <Button style={styles.contentButton} onPress={() => backendDatabaseFunctions.scanDevices()}>
+              <Body>
+                <Text style={styles.text}>Scan for BLE Devices</Text>
               </Body>
             </Button>
 
