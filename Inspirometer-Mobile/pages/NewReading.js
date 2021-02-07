@@ -1,41 +1,8 @@
 import React, { Component } from 'react';
-import {StyleSheet, Dimensions, AsyncStorage} from 'react-native';
+import {StyleSheet, Dimensions} from 'react-native';
 import { Container, Content, Button, Text, Body, Card, CardItem} from 'native-base';
 
-function getCurrentKey() {
-  return new Date() + "";
-}
-
-async function storeData(key, value) {
-  try {
-      await AsyncStorage.setItem(key, value);
-  } catch (error) {
-      // Error saving data
-  }
-}
-
-async function retrieveData(key) {
-  try {
-      const value = await AsyncStorage.getItem(key);
-      if (value !== null) {
-          // Our data is fetched successfully
-          console.log(value);
-      }
-  } catch (error) {
-      // Error retrieving data
-  }
-}
-
-async function allData() {
-  try {
-    const keys = await AsyncStorage.getAllKeys();
-    const items = await AsyncStorage.multiGet(keys)
-
-    return items
-} catch (error) {
-    console.log(error, "Problem")
-}
-}
+import backendDatabaseFunctions from './Functions/backendData';
 
 export default class NewReading extends Component {
   render() {
@@ -93,30 +60,6 @@ export default class NewReading extends Component {
       }
     });
 
-    function recordTest() {
-      var key = getCurrentKey();
-      console.log(key);
-      var value = (Math.random() * 10) + "";
-
-      //do stuff with device to do the test
-
-      storeData(key, value);
-    }
-
-    async function getAllData() {
-      var data = await allData();
-      console.log(data);
-    }
-
-    async function clearData() {
-      try {
-        AsyncStorage.clear();
-      } catch (err)
-      {
-        console.log("Error: " + err);
-      }
-    }
-
     return (
         <Content>
 
@@ -124,25 +67,25 @@ export default class NewReading extends Component {
 
           <Body>
 
-            <Button style={styles.contentButton} onPress={() => recordTest()}>
+            <Button style={styles.contentButton} onPress={() => backendDatabaseFunctions.recordTest()}>
               <Body>
                 <Text style={styles.text}>Start new test</Text>
               </Body>
             </Button>
 
-            <Button style={styles.contentButton} onPress={() => retrieveData(getCurrentKey())}>
+            <Button style={styles.contentButton} onPress={() => backendDatabaseFunctions.retrieveData(getCurrentKey())}>
               <Body>
                 <Text style={styles.text}>retrieve data</Text>
               </Body>
             </Button>
 
-            <Button style={styles.contentButton} onPress={() => getAllData()}>
+            <Button style={styles.contentButton} onPress={() => backendDatabaseFunctions.getAllData()}>
               <Body>
                 <Text style={styles.text}>Get all data</Text>
               </Body>
             </Button>
 
-            <Button style={styles.contentButton} onPress={() => clearData()}>
+            <Button style={styles.contentButton} onPress={() => backendDatabaseFunctions.clearData()}>
               <Body>
                 <Text style={styles.text}>DELETE EVERYTHING</Text>
               </Body>

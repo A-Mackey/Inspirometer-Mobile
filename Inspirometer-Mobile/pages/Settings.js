@@ -1,7 +1,9 @@
 import React, { Component, useState } from 'react';
 import { Left, Right, Card, CardItem, List, ListItem, Container, Body, Header, Content, Button, Text } from 'native-base';
 import { Image, Switch, StyleSheet, Dimensions, View } from 'react-native';
+
 import { AppLoading } from 'expo';
+import backendDatabaseFunctions from './Functions/backendData';
 
 
 //Setting Variables
@@ -102,6 +104,20 @@ export default class Settings extends Component {
                       <View>
                       {this.state.setting2 && <Text style={styles.settingTextOn}>On</Text>}
                       {!this.state.setting2 && <Text style={styles.settingTextOff}>Off</Text>}
+                      </View>
+                    </Button>
+                  </Right>
+                </ListItem>
+
+                <ListItem>
+                  <Left><Text>Clear All Data</Text></Left>
+                  <Right>
+                    <Button
+                      style={{backgroundColor: 'red'}}
+                      onPress={() => backendDatabaseFunctions.clearData()}
+                      >
+                      <View>
+                      {<Text style={{color: 'white'}}>Clear</Text>}
                       </View>
                     </Button>
                   </Right>
