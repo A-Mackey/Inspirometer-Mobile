@@ -3,17 +3,7 @@ import { Dimensions } from 'react-native';
 import { Container, Header, Content, Button, Text, View, Card, CardItem, Body, Left, Right } from 'native-base';
 import { LineChart, BarChart, PieChart, ProgressChart, ContributionGraph, StackedBarChart } from "react-native-chart-kit";
 
-async function retrieveData(key) {
-    try {
-        const value = await AsyncStorage.getItem(key);
-        if (value !== null) {
-            // Our data is fetched successfully
-            console.log(value);
-        }
-    } catch (error) {
-        // Error retrieving data
-    }
-  }
+import globalDatabaseFunctions from './Functions/backendData';
 
 export default class Chart extends Component {
     constructor(props) {

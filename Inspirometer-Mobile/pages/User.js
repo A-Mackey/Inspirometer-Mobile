@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Dimensions, ColorPropType } from 'react-native';
-import { Container, View, Content, Form, Item, Input, Label, Text, Button, Body, List, ListItem } from 'native-base';
+import { Dimensions } from 'react-native';
+import { Container, View, Content, Text, } from 'native-base';
 import { AppLoading } from 'expo';
 
 import globalDatabaseFunctions from './Functions/backendData';
-
+    
+const windowWidth = Dimensions.get('window').width;
 
 export default class User extends Component {
 
@@ -18,31 +19,26 @@ export default class User extends Component {
   render() {
     if (!this.state.isReady) {
       getData()
-        .catch(err => console.log("get Data error 1: " + err));
+        .catch(err => console.log("getData error 1: " + err));
       return <AppLoading/>
     }
-    
-    const windowWidth = Dimensions.get('window').width;
 
     async function getData() {
       var d = await globalDatabaseFunctions.getAllData()
-        .catch(err => console.log("get Data error 2: " + err));
-      this.state.isReady = true;
-      console.log("HERE");
+      .then(
+        this.state.isReady = true,
+        console.log("HERE"),
+      )
+        .catch(err => console.log("getData error 2: " + err));
       return d;
     }
-
 
     return (
       <Container>
         <View>
           <Content>
 
-
-
             <Text>TESTING</Text>
-
-
 
           </Content>
         </View>

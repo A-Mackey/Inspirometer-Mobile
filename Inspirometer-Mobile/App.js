@@ -32,7 +32,8 @@ export default class App extends React.Component {
       Roboto: require('native-base/Fonts/Roboto.ttf'),
       Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
       ...Ionicons.font,
-    });
+    })
+    .catch(err => console.log("Font load error: " + err));
     this.setState({ isReady: true });
 
     console.log("Mounted");

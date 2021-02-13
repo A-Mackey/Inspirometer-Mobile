@@ -41,8 +41,8 @@ globalDatabaseFunctions.retrieveData = async function(key) {
 
 globalDatabaseFunctions.allData = async function() {
     try {
-        const keys = await AsyncStorage.getAllKeys();
-        const items = await AsyncStorage.multiGet(keys)
+        const keys = await AsyncStorage.getAllKeys().catch(err => console.log("getAllKeys error: " + err));
+        const items = await AsyncStorage.multiGet(keys).catch(err => console.log("multiGet error: " + err));
     
         return items
     } catch (error) {
@@ -61,7 +61,7 @@ globalDatabaseFunctions.recordTest = function() {
     }
 
 globalDatabaseFunctions.getAllData = async function() {
-    var data = await globalDatabaseFunctions.allData();
+    var data = await globalDatabaseFunctions.allData().catch(err => console.log("globalData allData error: " + err));
     console.log(data);
     return data;
 }
